@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js – The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/monokai-sublime.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+					document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<img src="img/logoClubElec.png" alt="logo club elec" style="border:none;box-shadow:none;max-width:50%;background:none">
+					<h1>Les IHM en Java</h1>
+					<p>By <a href="josephcaillet.fr">Joseph Caillet</a></p>
+				</section>
+				
+				<section>
+					<h2>Qui suis-je ?</h2>
+					<h3>Joseph Caillet</h3>
+					<ul style="text-align:center;list-style:none;margin:0px;">
+                        <li>Etudiant CIR3 à l'isen Brest</li>
+                        <li>Ancien stagiaire chez Cozy Cloud</li>
+                    </ul>
+					<p>
+						<small><a href="jopsephcaillet.fr">jopsephcaillet.fr</a> - <a href="mailto:joseph.caillet@isen-bretagne.fr">joseph.caillet@isen-bretagne.fr</a></small>
+					</p>
+				</section>
+				
+				<section>
+					<h2>Plan du cours</h2>
+					<ol>
+						<li>Généralités</li>
+						<li>Le positionnement d'éléments</li>
+						<li>Les événements</li>
+						<li>Quelques composants en vrac</li>
+						<li>Bonus: conseils divers</li>
+					</ol>
+					<p><small>Ce cours est conçu comme une initiation aux interfaces graphiques en Java, et ne prétend pas à l'exhaustivité. Il a pour but de présenter les technique de bases, et de vous permetre d'orienter vos recherches futures dans ce domaine.</small></p>
+				</section>
+				
+				<section>
+					<h2>Généralités</h2>
+					<p>Les différentes technologies fournies avec java pour la conception d'interfaces :</p>
+					<ul>
+						<li>AWT (Abstract Window Toolkit)</li>
+						<li>Swing (lié à AWT)</li>
+						<li>JavaFX (récent, sorti avec le jdk 8)</li>
+					</ul>
+					<p>Lors de ce cours nous utiliserons Swing.</p>
+				</section>
+				
+				<section>
+					<section>
+						<h2>Le positionnement d'éléments</h2>
+						<h3>Les différents type d'objets</h3>
+						<ul>
+							<li>Les conteneurs (JFrame, JPanel, ...)</li>
+							<li>Les contenus (JLabel, JButton, ..., et JPanel?)</li>
+						</ul>
+						<p>Remarque: le JPanel fait parti des deux familles, nous verrons pourquoi...</p>
+					</section>
+					
+					<section>
+						<h2>Les conteneurs de base</h2>
+						<h3>La JFrame, conteneur principal de votre application</h3>
+						<p>La JFrame posséde un seul emplacement pour accueillir d'autres composants: le ContentPane.</p>
+						<pre><code class="hljs java" data-trim contenteditable>
+//Pratique trés courante: hériter de JFrame pour créer sa fenetre.
+public class Fenetre extends JFrame{
+	public Fenetre(){
+		setTitle("Titre");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane()//Récupérer le content pane
+		setContentPane(un conteneur ici)//Remplacer le content pane
+		setVisible(true);
+	}
+}
+						</code></pre>
+					</section>
+					
+					<section>
+						<h2>Les conteneurs de base</h2>
+						<h3>Le JPanel, conteneur de base par exellence.</h3>
+						<p>Le Jpanel est un conteneur basique.</p>
+						<pre><code class="hljs java" data-trim contenteditable>
+public class Fenetre extends JFrame{
+	public Fenetre(){
+		JPanel panneau = new JPanel();
+		//Methode 1
+		panneau.setBackground(Color.RED);
+		setContentPane(panneau);
+		//Methode 2
+		//ici, le ContentPane se comporte comme un JPanel
+		getContentPane().setBackground(Color.RED);
+		setVisible(true);
+	}
+}
+						</code></pre>
+						<p><small>
+							NB: à partir de maintenant, les exemples de codes sont considérés comme étant insérés dans le code d'une classe héritant de JFrame. L'objet courant this sera la plupart du temps la classe héritée en question.
+						</small></p>
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						<h2>Organisation des composants</h2>
+						<h3>Les Layout Managers</h3>
+						<p>Pour ajouter un composant dans un conteneur (comme un JPanel), on a besoin de trois éléments:</p>
+						<ul>
+							<li>Un conteneur</li>
+							<li>Un/Des éléments contenus (les composants)</li>
+							<li>Un objet d'agencement (un layout manager)</li>
+						</ul>
+						<pre><code class="hljs java" data-trim contenteditable>
+conteneur.setLayout(objAgencement);
+conteneur.add(contenu1);
+conteneur.add(contenu2);
+						</code></pre>
+						<p>Le comportement de la methode add() et ses arguments seront différents suivant l'objet d'agencement choisi.</p>
+					</section>
+					
+					<section>
+						<h3>
+							FlowLayout
+						</h3>
+						<p>Dispose les composants les uns à la suite des autres. Passe à la ligne si besoin. Layout par défaut des JPanel.</p>
+						<img src="img/lm_flowlayout.png" alt="img flowlayout">
+						<pre><code class="hljs java" data-trim contenteditable>
+JPanel panneau = new JPanel();
+FlowLayout fl = new FlowLayout(FlowLayout.CENTER);
+panneau.setLayout(fl);
+
+panneau.add(conposant1);
+panneau.add(conposant2);
+...
+panneau.add(conposant5);
+						</code></pre>
+					</section>
+					
+					<section>
+						<h3>
+							BoxLayout
+						</h3>
+						<p>Dispose les composants les uns à la suite des autres, en collones ou en ligne.</p>
+						<img src="img/lm_boxlayout.png" alt="img boxlayout" style="width:50%">
+						<pre><code class="hljs java" data-trim contenteditable>
+JPanel panneau = new JPanel();
+panneau.setLayout(new BoxLayout(panneau, BoxLayout.PAGE_AXIS));
+panneau.add(conposant1);
+
+Box boite = Box.createVerticalBox()
+boite.add(composant1)
+						</code></pre>
+					</section>
+					
+					<section>
+						<h3>
+							GridLayout
+						</h3>
+						<p>Dispose les composants les uns à la suite des autres, dans une grille.</p>
+						<img src="img/lm_gridlayout.png" alt="img boxlayout">
+						<pre><code class="hljs java" data-trim contenteditable>
+JPanel panneau = new JPanel();
+panneau.setLayout(new GridLayout(3, 2));
+
+panneau.add(conposant1);
+panneau.add(conposant2);
+...
+panneau.add(conposant5);
+						</code></pre>
+					</section>
+					
+					<section>
+						<h3>
+							BorderLayout
+						</h3>
+						<p>Dispose les composants aux points cardinaux.</p>
+						<img src="img/lm_borderlayout.png" alt="img boxlayout">
+						<pre><code class="hljs java" data-trim contenteditable>
+JPanel panneau = new JPanel();
+panneau.setLayout(new BorderLayout());
+
+panneau.add(conposantNord, BorderLayout.NORTH);
+panneau.add(conposantOuest, BorderLayout.WEST);
+panneau.add(conposantCentre, BorderLayout.CENTER);
+						</code></pre>
+					</section>
+					
+					<section>
+						<h3>
+							Ils en existe encore d'autres...
+						</h3>
+						<a href="https://docs.oracle.com/javase/tutorial/uiswing/layout/visual.html">Voir les différents layouts existants</a>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>
+							Placer les composant ds la fenetre
+						</h3>
+						<p>Rappel: votre JFrame posséde un seul et unique ContentPane.</p>
+						<pre><code class="hljs java" data-trim contenteditable>
+//Méthode 1:
+//remplacer le ContentPane par un JPanel mis en page
+JPanel panneau = new JPannel();
+panneau.setLayout(...);
+panneau.add(...);
+setContentPane(panneau);
+
+//Méthode 2a:
+//accéder au ContentPane directement
+getContentPane().setLayout(...)
+getContentPane().add(...)
+
+//Méthode 2b:
+//utiliser les méthodes redéfinnies par la classe JFrame:
+setLayout(...)
+add(...)
+						</code></pre>
+					</section>
+					
+					<section>
+						<h3>
+							Mise en page élaborée
+						</h3>
+						<p>Les possibillitées des layouts sont limitées, mais...</p>
+						<h4>
+							Le retour du JPanel
+						</h4>
+						<p>Tous conteneur est potentiellement un contenu. En effet, il est possible d'inclure des conteneurs dans un conteneur!</p>
+						<pre><code class="hljs java" data-trim contenteditable>
+JPanel conteneur = new JPannel();
+JPanel contenu1 = new JPannel();
+JPanel contenu2 = new JPannel();
+
+conteneur.add(contenu1);
+conteneur.add(contenu2);
+
+setContentPane(conteneur)
+						</code></pre>
+					</section>
+					
+					<section>
+						<h2>
+							TP1 : Afficher un drapeau
+						</h2>
+						<p>Créer une fenetre, y afficher un drapeau simple avec des JPanel de couleurs différentes.</p>
+					</section>
+					
+					<section>
+						<h2>
+							TP1 : Afficher un drapeau
+						</h2>
+						<pre><code class="hljs java" data-trim contenteditable>
+public Fenetre extends JFrame{
+	public Fenetre(){
+		super("TP1: Drapeau");
+		
+		JPanel bleu = new JPannel();
+		JPanel blanc = new JPannel();
+		JPanel rouge = new JPannel();
+
+		bleu.setBackground(Color.BLUE);
+		blanc.setBackground(Color.BLUE);
+		rouge.setBackground(Color.RED);
+
+		setLayout(new GridLayout(1, 3));
+		add(bleu);
+		add(blanc);
+		add(rouge);
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+	}
+	
+	public static void main(String[] args){
+		Fenetre f = new Fenetre();
+	}
+}
+						</code></pre>
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						<h2>Les Composants contenus et les événements</h2>
+						<p>Il existe deux façons d'intéragir avec un composant:</p>
+						<ul>
+							<li>Le composant nous avertit lorsqu'il à changé d'état</li>
+							<li>On vérifie l'état du composant "à la main"</li>
+						</ul>
+						<p><br>Ex: la barre de recherche google:</p>
+						<ul style="list-style-type: circle;">
+							<li>Autocomplétion lors de la frappe (changement d'état)</li>
+							<li>Récupération contenu et lancement recherche lors du clic sur le bouton ad hoc</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h3>Vérification à la main</h3>
+						<p>
+							Pad de méthode générale: il faut aller lire la doc du composant pour savoir ce qu'on peut récuperer. Rechercher en particulier les méthodes de type getXXX() et isXXX().
+						</p>
+						<p>
+							Exemple: le composant JCheckBox, une case à cocher, posséde une méthode isSelected() retournant un booléen.
+						</p>
+					</section>
+					
+					<section>
+						<h3>Le composant nous avertit</h3>
+						<p>
+							Principe des événements: le composant va "avertir" un objet lorsque son état va changer.
+							Pour cela, il faut deux choses:
+						</p>
+						<ol>
+							<li>Un composant "écoutable" (nous prendrons un JButton)</li>
+							<li>Un objet "écouteur" (des objet de type XXXListener)</li>
+						</ol>
+						<p>Pour connaitre le type du/des "écouteur(s)" accépé par un composant, rechercher dans la doc du composant les méthode de type addXXXListener().</p>
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						<h2>Créer un Listener et le lier à notre boutton</h2>
+						<p>4 méthodes</p>
+						<ol style="min-width: 40%">
+							<li>La classe anonyme</li>
+							<li>Un objet à part</li>
+							<li>La fenetre elle même</li>
+							<li>La classe interne</li>
+						</ol>
+					</section>
+					
+					<section>
+						<h3>La classe anonyme</h3>
+						<pre><code class="hljs java" data-trim contenteditable>
+JButton btn = new JButton("Clic");
+JButton.addActionListener(new ActionListener() {
+	public void actionPerformed(ActionEvent actionEvent) {
+		System.out.println("Bouton cliqué!");
+	}
+});
+						</code></pre>
+					</section>
+					
+					<section>
+						<h3>Un objet à part</h3>
+						<pre><code class="hljs java" data-trim contenteditable>
+public class RessourcesLoader implements ActionListener{
+	public void actionPerformed(ActionEvent e){
+		loadRessources();
+	}
+	
+	public void loadRessources(){
+		System.out.println("Loading datas...");
+	}
+}
+						</code></pre>
+						<pre><code class="hljs java" data-trim contenteditable>
+JButton btn = new JButton("Clic");
+RessourcesLoader rl = new RessourcesLoader();
+JButton.addActionListener(rl);
+						</code></pre>
+					</section>
+					
+					<section>
+						<h3>La fenetre elle même</h3>
+						<pre><code class="hljs java" data-trim contenteditable>
+public class Fenetre extends JFrame implements ActionListener{
+	private JButton btn1 = new JButton("Texte premier bouton");
+	private JButton btn2 = new JButton("Bouton num deux.");
+	
+	public void actionPerformed(ActionEvent e){
+		JButton btn = (JButton) e.getSource();
+		System.out.println(btn.getText());
+	}
+}
+						</code></pre>
+					</section>
+					
+					<section>
+						<h3>La classe interne</h3>
+						<pre><code class="hljs java" data-trim contenteditable>
+public Fenetre extends JFrame{
+	private JButton btn1 = new JButton("btn1");
+	private JButton btn2 = new JButton("btn2");
+	
+	class LecteurTexteBouton implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			if(e.getSource() == btn1){
+				System.out.println("btn1 clic")
+			} else if(e.getSource() == btn2){
+				System.out.println("btn2 clic")
+			}
+		}
+	}
+}
+						</code></pre>
+					</section>
+				</section>
+			</div>
+		<!-- this.pack();
+		this.setMinimumSize(new Dimension(this.getWidth(),150));
+		
+		
+		
+		try
+		{
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch (ClassNotFoundException e) {}
+		catch (InstantiationException e) {}
+		catch (IllegalAccessException e) {}
+		catch (UnsupportedLookAndFeelException e) {}
+		
+		BorderFactory
+		-->
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				slideNumber: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
