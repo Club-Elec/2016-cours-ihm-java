@@ -66,7 +66,7 @@
 						<li>Le positionnement d'éléments</li>
 						<li>Les événements</li>
 						<li>Quelques composants en vrac</li>
-						<li>Bonus: conseils divers</li>
+						<li>Bonus : conseils divers</li>
 					</ol>
 					<p><small>Ce cours est conçu comme une initiation aux interfaces graphiques en Java, et ne prétend pas à l'exhaustivité. Il a pour but de présenter les technique de bases, et de vous permetre d'orienter vos recherches futures dans ce domaine.</small></p>
 				</section>
@@ -90,7 +90,7 @@
 							<li>Les conteneurs (JFrame, JPanel, ...)</li>
 							<li>Les contenus (JLabel, JButton, ..., et JPanel?)</li>
 						</ul>
-						<p>Remarque: le JPanel fait parti des deux familles, nous verrons pourquoi...</p>
+						<p>Remarque : le JPanel fait parti des deux familles, nous verrons pourquoi...</p>
 					</section>
 					
 					<section>
@@ -98,7 +98,7 @@
 						<h3>La JFrame, conteneur principal de votre application</h3>
 						<p>La JFrame posséde un seul emplacement pour accueillir d'autres composants: le ContentPane.</p>
 						<pre><code class="hljs java" data-trim contenteditable>
-//Pratique trés courante: hériter de JFrame pour créer sa fenetre.
+//Pratique trés courante : hériter de JFrame pour créer sa fenetre.
 public class Fenetre extends JFrame{
 	public Fenetre(){
 		setTitle("Titre");
@@ -130,7 +130,7 @@ public class Fenetre extends JFrame{
 }
 						</code></pre>
 						<p><small>
-							NB: à partir de maintenant, les exemples de codes sont considérés comme étant insérés dans le code d'une classe héritant de JFrame. L'objet courant this sera la plupart du temps la classe héritée en question.
+							NB : à partir de maintenant, les exemples de codes sont considérés comme étant insérés dans le code d'une classe héritant de JFrame. L'objet courant this sera la plupart du temps la classe héritée en question.
 						</small></p>
 					</section>
 				</section>
@@ -139,7 +139,7 @@ public class Fenetre extends JFrame{
 					<section>
 						<h2>Organisation des composants</h2>
 						<h3>Les Layout Managers</h3>
-						<p>Pour ajouter un composant dans un conteneur (comme un JPanel), on a besoin de trois éléments:</p>
+						<p>Pour ajouter un composant dans un conteneur (comme un JPanel), on a besoin de trois éléments :</p>
 						<ul>
 							<li>Un conteneur</li>
 							<li>Un/Des éléments contenus (les composants)</li>
@@ -232,22 +232,22 @@ panneau.add(conposantCentre, BorderLayout.CENTER);
 						<h3>
 							Placer les composant ds la fenetre
 						</h3>
-						<p>Rappel: votre JFrame posséde un seul et unique ContentPane.</p>
+						<p>Rappel : votre JFrame posséde un seul et unique ContentPane.</p>
 						<pre><code class="hljs java" data-trim contenteditable>
-//Méthode 1:
+//Méthode 1 :
 //remplacer le ContentPane par un JPanel mis en page
 JPanel panneau = new JPannel();
 panneau.setLayout(...);
 panneau.add(...);
 setContentPane(panneau);
 
-//Méthode 2a:
+//Méthode 2a :
 //accéder au ContentPane directement
 getContentPane().setLayout(...)
 getContentPane().add(...)
 
-//Méthode 2b:
-//utiliser les méthodes redéfinnies par la classe JFrame:
+//Méthode 2b :
+//utiliser les méthodes redéfinnies par la classe JFrame :
 setLayout(...)
 add(...)
 						</code></pre>
@@ -261,7 +261,7 @@ add(...)
 						<h4>
 							Le retour du JPanel
 						</h4>
-						<p>Tous conteneur est potentiellement un contenu. En effet, il est possible d'inclure des conteneurs dans un conteneur!</p>
+						<p>Tous conteneur est potentiellement un contenu. En effet, il est possible d'inclure des conteneurs dans un conteneur !</p>
 						<pre><code class="hljs java" data-trim contenteditable>
 JPanel conteneur = new JPannel();
 JPanel contenu1 = new JPannel();
@@ -288,7 +288,7 @@ setContentPane(conteneur)
 						<pre><code class="hljs java" data-trim contenteditable>
 public Fenetre extends JFrame{
 	public Fenetre(){
-		super("TP1: Drapeau");
+		super("TP1 : Drapeau");
 		
 		JPanel bleu = new JPannel();
 		JPanel blanc = new JPannel();
@@ -318,12 +318,12 @@ public Fenetre extends JFrame{
 				<section>
 					<section>
 						<h2>Les Composants contenus et les événements</h2>
-						<p>Il existe deux façons d'intéragir avec un composant:</p>
+						<p>Il existe deux façons d'intéragir avec un composant :</p>
 						<ul>
 							<li>Le composant nous avertit lorsqu'il à changé d'état</li>
 							<li>On vérifie l'état du composant "à la main"</li>
 						</ul>
-						<p><br>Ex: la barre de recherche google:</p>
+						<p><br>Ex : la barre de recherche google :</p>
 						<ul style="list-style-type: circle;">
 							<li>Autocomplétion lors de la frappe (changement d'état)</li>
 							<li>Récupération contenu et lancement recherche lors du clic sur le bouton ad hoc</li>
@@ -333,18 +333,18 @@ public Fenetre extends JFrame{
 					<section>
 						<h3>Vérification à la main</h3>
 						<p>
-							Pad de méthode générale: il faut aller lire la doc du composant pour savoir ce qu'on peut récuperer. Rechercher en particulier les méthodes de type getXXX() et isXXX().
+							Pad de méthode générale : il faut aller lire la doc du composant pour savoir ce qu'on peut récuperer. Rechercher en particulier les méthodes de type getXXX() et isXXX().
 						</p>
 						<p>
-							Exemple: le composant JCheckBox, une case à cocher, posséde une méthode isSelected() retournant un booléen.
+							Exemple : le composant JCheckBox, une case à cocher, posséde une méthode isSelected() retournant un booléen.
 						</p>
 					</section>
 					
 					<section>
 						<h3>Le composant nous avertit</h3>
 						<p>
-							Principe des événements: le composant va "avertir" un objet lorsque son état va changer.
-							Pour cela, il faut deux choses:
+							Principe des événements : le composant va "avertir" un objet lorsque son état va changer.
+							Pour cela, il faut deux choses :
 						</p>
 						<ol>
 							<li>Un composant "écoutable" (nous prendrons un JButton)</li>
@@ -370,9 +370,9 @@ public Fenetre extends JFrame{
 						<h3>La classe anonyme</h3>
 						<pre><code class="hljs java" data-trim contenteditable>
 JButton btn = new JButton("Clic");
-JButton.addActionListener(new ActionListener() {
+btn.addActionListener(new ActionListener() {
 	public void actionPerformed(ActionEvent actionEvent) {
-		System.out.println("Bouton cliqué!");
+		System.out.println("Bouton cliqué !");
 	}
 });
 						</code></pre>
@@ -394,7 +394,7 @@ public class RessourcesLoader implements ActionListener{
 						<pre><code class="hljs java" data-trim contenteditable>
 JButton btn = new JButton("Clic");
 RessourcesLoader rl = new RessourcesLoader();
-JButton.addActionListener(rl);
+btn.addActionListener(rl);
 						</code></pre>
 					</section>
 					
@@ -404,6 +404,9 @@ JButton.addActionListener(rl);
 public class Fenetre extends JFrame implements ActionListener{
 	private JButton btn1 = new JButton("Texte premier bouton");
 	private JButton btn2 = new JButton("Bouton num deux.");
+	
+	btn1.addActionListener(this);
+	btn2.addActionListener(this);
 	
 	public void actionPerformed(ActionEvent e){
 		JButton btn = (JButton) e.getSource();
@@ -420,6 +423,9 @@ public Fenetre extends JFrame{
 	private JButton btn1 = new JButton("btn1");
 	private JButton btn2 = new JButton("btn2");
 	
+	btn1.addActionListener(new LecteurTexteBouton());
+	btn2.addActionListener(new LecteurTexteBouton());
+	
 	class LecteurTexteBouton implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			if(e.getSource() == btn1){
@@ -433,23 +439,122 @@ public Fenetre extends JFrame{
 						</code></pre>
 					</section>
 				</section>
+				
+				<section>
+					<section>
+						<h2>Présentation rapide de composants</h2>
+					</section>
+					
+					<section>
+						<h3>Conposants de type formulaire</h3>
+						<ul>
+							<li>JComboBox : Liste déroulante</li>
+							<li>JCheckBox : Case à cocher</li>
+							<li>JRadioButton : Bouton radio</li>
+							<li>JTextField : Champ texte</li>
+							<li>JFormattedTextField : Champ texte formatté</li>
+							<li>JPasswordField : Champ mot de passe</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Boites de dialogues</h2>
+						<p>Basique : JOptionPane</p>
+						<p>Evoluée : hériter de JDialog</p>
+					</section>
+					
+					<section>
+						<h2>Menus et barre d'outils</h2>
+						<ul>
+							<li>JMenuBar, JMenu, JMenuItem</li>
+							<li>JToolBar</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Autres composants</h2>
+						<ul>
+							<li>JSplitPane : deux composant avec un slider</li>
+							<li>JScrollPane : barres de défilement si déborde</li>
+							<li>JTextArea : grande zone de texte</li>
+							<li>JTabbedPane : conteneur à onglet</li>
+							<li>JSlider : curseur</li>
+							<li>JSpinner : champ pour un entier borné (ou pas)</li>
+							<li>JProgressBar : barre de progression</li>
+							<li>BorderFactory : création de bordure</li>
+						</ul>
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						<h2>Bonus : conseil divers</h2>
+						<p>Faire une/des maquette(s) COMPLETE</p>
+						<img src="img/maquette.png" alt="maquette">
+						<p>Viser la simplicité</p>
+					</section>
+					
+					<section>
+						<h3>Faire une/des maquette(s) COMPLETE</h3>
+						<img src="img/burgerquizz.png" alt="maquette">
+						<p>Suivre la maquette pour la réalisation</p>
+					</section>
+					
+					<section>
+						<h3>Mettre en place le Look and Fell du système</h3>
+						<pre><code class="hljs java" data-trim contenteditable>
+try
+{
+	UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+}
+catch (ClassNotFoundException e) {}
+catch (InstantiationException e) {}
+catch (IllegalAccessException e) {}
+catch (UnsupportedLookAndFeelException e) {}
+						</code></pre>
+					</section>
+					
+					<section>
+						<h3>Taille minimale</h3>
+						<pre><code class="hljs java" data-trim contenteditable>
+this.pack();
+this.setMinimumSize(
+	new Dimension(this.getWidth(), this.getHeight())
+);
+						</code></pre>
+					</section>
+					
+					<section>
+						<h3>Décomposer son code</h3>
+						<p>Diviser votre IHM en zone à construire, et créer une méthode pour la construction de chaque zones. Ne pas tout mettre dans le constructeur !</p>
+						<p>Ne pas hésiter à mettre les initialisation barbantes lors de la déclaration des attributs, et à utiliser des variable locale pour la création de votre IHM</p>
+						<h3>Bien nommer vos variables</h3>
+						<p>Dans une IHM à beaucoup de composant, cela aide grandement !</p>
+					</section>
+					
+					<section>
+						<h3>coller à la philosophie MVC</h3>
+						<p>Essayer de séparer le plus possible les composants M, V et C.</p>
+						<p>Pour le Modèle, aller voir le design pattern DAO, bon complément du design pattern MVC.</p>
+					</section>
+					
+					<section>
+						<h3>Pratiquez, lancez vous dans des projets perso !</h3>
+						<img src="img/JPedi.png" alt="jpedi" style="width: 60%">
+					</section>
+					
+					<section>
+						<h1>RTFM</h1>
+						<p>La <a href="http://docs.oracle.com/javase/8/docs/api/">Javadoc</a> est votre amie !</p>
+					</section>
+				</section>
+				
+				<section>
+					<h1>Fin du cours</h1>
+					<p>Merci de votre attention :)</p>
+					<h4>Des questions ?</h4>
+				</section>
 			</div>
-		<!-- this.pack();
-		this.setMinimumSize(new Dimension(this.getWidth(),150));
-		
-		
-		
-		try
-		{
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		}
-		catch (ClassNotFoundException e) {}
-		catch (InstantiationException e) {}
-		catch (IllegalAccessException e) {}
-		catch (UnsupportedLookAndFeelException e) {}
-		
-		BorderFactory
-		-->
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
