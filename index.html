@@ -98,9 +98,9 @@
 						<h3>La JFrame, conteneur principal de votre application</h3>
 						<p>La JFrame posséde un seul emplacement pour accueillir d'autres composants: le ContentPane.</p>
 						<pre><code class="hljs java" data-trim contenteditable>
-//Pratique trés courante : hériter de JFrame pour créer sa fenetre.
+//Pratique très courante : hériter de JFrame pour créer sa fenêtre.
 public class Fenetre extends JFrame{
-	public Fenetre(){
+	public fenêtre(){
 		setTitle("Titre");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane()//Récupérer le content pane
@@ -230,7 +230,7 @@ panneau.add(conposantCentre, BorderLayout.CENTER);
 				<section>
 					<section>
 						<h3>
-							Placer les composant ds la fenetre
+							Placer les composant dans la fenêtre
 						</h3>
 						<p>Rappel : votre JFrame posséde un seul et unique ContentPane.</p>
 						<pre><code class="hljs java" data-trim contenteditable>
@@ -278,7 +278,7 @@ setContentPane(conteneur)
 						<h2>
 							TP1 : Afficher un drapeau
 						</h2>
-						<p>Créer une fenetre, y afficher un drapeau simple avec des JPanel de couleurs différentes.</p>
+						<p>Créer une fenêtre, y afficher un drapeau simple avec des JPanel de couleurs différentes.</p>
 					</section>
 					
 					<section>
@@ -320,20 +320,20 @@ public Fenetre extends JFrame{
 						<h2>Les Composants contenus et les événements</h2>
 						<p>Il existe deux façons d'intéragir avec un composant :</p>
 						<ul>
-							<li>Le composant nous avertit lorsqu'il à changé d'état</li>
+							<li>Le composant nous avertit lorsqu'il change d'état</li>
 							<li>On vérifie l'état du composant "à la main"</li>
 						</ul>
 						<p><br>Ex : la barre de recherche google :</p>
 						<ul style="list-style-type: circle;">
 							<li>Autocomplétion lors de la frappe (changement d'état)</li>
-							<li>Récupération contenu et lancement recherche lors du clic sur le bouton ad hoc</li>
+							<li>Récupération contenu et lancement recherche lors du clic sur le bouton ad hoc (récupération à la main)</li>
 						</ul>
 					</section>
 					
 					<section>
 						<h3>Vérification à la main</h3>
 						<p>
-							Pad de méthode générale : il faut aller lire la doc du composant pour savoir ce qu'on peut récuperer. Rechercher en particulier les méthodes de type getXXX() et isXXX().
+							Pas de méthode générale : il faut aller lire la doc du composant pour savoir ce qu'on peut récuperer. Rechercher en particulier les méthodes de type getXXX() et isXXX().
 						</p>
 						<p>
 							Exemple : le composant JCheckBox, une case à cocher, posséde une méthode isSelected() retournant un booléen.
@@ -350,18 +350,18 @@ public Fenetre extends JFrame{
 							<li>Un composant "écoutable" (nous prendrons un JButton)</li>
 							<li>Un objet "écouteur" (des objet de type XXXListener)</li>
 						</ol>
-						<p>Pour connaitre le type du/des "écouteur(s)" accépé par un composant, rechercher dans la doc du composant les méthode de type addXXXListener().</p>
+						<p>Pour connaitre le type du/des "écouteur(s)" acceptés par un composant, rechercher dans la doc du composant les méthode de type addXXXListener().</p>
 					</section>
 				</section>
 				
 				<section>
 					<section>
-						<h2>Créer un Listener et le lier à notre boutton</h2>
+						<h2>Créer un Listener et le lier à notre bouton</h2>
 						<p>4 méthodes</p>
 						<ol style="min-width: 40%">
 							<li>La classe anonyme</li>
 							<li>Un objet à part</li>
-							<li>La fenetre elle même</li>
+							<li>La fenêtre elle même</li>
 							<li>La classe interne</li>
 						</ol>
 					</section>
@@ -399,9 +399,9 @@ btn.addActionListener(rl);
 					</section>
 					
 					<section>
-						<h3>La fenetre elle même</h3>
+						<h3>La fenêtre elle même</h3>
 						<pre><code class="hljs java" data-trim contenteditable>
-public class Fenetre extends JFrame implements ActionListener{
+public class fenêtre extends JFrame implements ActionListener{
 	private JButton btn1 = new JButton("Texte premier bouton");
 	private JButton btn2 = new JButton("Bouton num deux.");
 	
@@ -419,7 +419,7 @@ public class Fenetre extends JFrame implements ActionListener{
 					<section>
 						<h3>La classe interne</h3>
 						<pre><code class="hljs java" data-trim contenteditable>
-public Fenetre extends JFrame{
+public fenêtre extends JFrame{
 	private JButton btn1 = new JButton("btn1");
 	private JButton btn2 = new JButton("btn2");
 	
@@ -452,6 +452,7 @@ public Fenetre extends JFrame{
 							<li>JCheckBox : Case à cocher</li>
 							<li>JRadioButton : Bouton radio</li>
 							<li>JTextField : Champ texte</li>
+							<li>JList : Selection d'éléments dans une liste</li>
 							<li>JFormattedTextField : Champ texte formatté</li>
 							<li>JPasswordField : Champ mot de passe</li>
 						</ul>
@@ -474,10 +475,10 @@ public Fenetre extends JFrame{
 					<section>
 						<h2>Autres composants</h2>
 						<ul>
-							<li>JSplitPane : deux composant avec un slider</li>
-							<li>JScrollPane : barres de défilement si déborde</li>
+							<li>JSplitPane : deux composants avec un slider</li>
+							<li>JScrollPane : barres de défilement si débordement</li>
 							<li>JTextArea : grande zone de texte</li>
-							<li>JTabbedPane : conteneur à onglet</li>
+							<li>JTabbedPane : conteneur à onglets</li>
 							<li>JSlider : curseur</li>
 							<li>JSpinner : champ pour un entier borné (ou pas)</li>
 							<li>JProgressBar : barre de progression</li>
@@ -489,9 +490,9 @@ public Fenetre extends JFrame{
 				<section>
 					<section>
 						<h2>Bonus : conseil divers</h2>
-						<p>Faire une/des maquette(s) COMPLETE</p>
+						<p>Faire une/des maquette(s) COMPLETE(S)</p>
 						<img src="img/maquette.png" alt="maquette">
-						<p>Viser la simplicité</p>
+						<p>Viser la simplicité !</p>
 					</section>
 					
 					<section>
@@ -526,20 +527,20 @@ this.setMinimumSize(
 					
 					<section>
 						<h3>Décomposer son code</h3>
-						<p>Diviser votre IHM en zone à construire, et créer une méthode pour la construction de chaque zones. Ne pas tout mettre dans le constructeur !</p>
-						<p>Ne pas hésiter à mettre les initialisation barbantes lors de la déclaration des attributs, et à utiliser des variable locale pour la création de votre IHM</p>
+						<p>Divisez votre IHM en zones à construire, et créez une méthode pour la construction de chaques zones. Ne pas tout mettre dans le constructeur !</p>
+						<p>Ne pas hésiter à mettre les initialisations barbantes lors de la déclaration des attributs, et à utiliser des variables locales pour la création de votre IHM</p>
 						<h3>Bien nommer vos variables</h3>
-						<p>Dans une IHM à beaucoup de composant, cela aide grandement !</p>
+						<p>Dans une IHM à beaucoup de composants, cela aide grandement !</p>
 					</section>
 					
 					<section>
 						<h3>coller à la philosophie MVC</h3>
-						<p>Essayer de séparer le plus possible les composants M, V et C.</p>
-						<p>Pour le Modèle, aller voir le design pattern DAO, bon complément du design pattern MVC.</p>
+						<p>Essayez de séparer le plus possible les composants M, V et C.</p>
+						<p>Pour le modèle, aller voir le design pattern DAO, bon complément du design pattern MVC.</p>
 					</section>
 					
 					<section>
-						<h3>Pratiquez, lancez vous dans des projets perso !</h3>
+						<h3>Pratiquez, lancez vous dans des projets persos !</h3>
 						<img src="img/JPedi.png" alt="jpedi" style="width: 60%">
 					</section>
 					
@@ -571,6 +572,7 @@ this.setMinimumSize(
 				center: true,
 
 				slideNumber: true,
+				mouseWheel: true,
 
 				transition: 'slide', // none/fade/slide/convex/concave/zoom
 
