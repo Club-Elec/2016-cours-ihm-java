@@ -43,7 +43,7 @@
 			<div class="slides">
 				<section>
 					<img src="img/logoClubElec.png" alt="logo club elec" style="border:none;box-shadow:none;max-width:50%;background:none">
-					<h1>Les IHM en Java</h1>
+					<h1>Les IHMs en Java</h1>
 					<p>By <a href="josephcaillet.fr">Joseph Caillet</a></p>
 				</section>
 				
@@ -164,10 +164,10 @@ JPanel panneau = new JPanel();
 FlowLayout fl = new FlowLayout(FlowLayout.CENTER);
 panneau.setLayout(fl);
 
-panneau.add(conposant1);
-panneau.add(conposant2);
+panneau.add(composant1);
+panneau.add(composant2);
 ...
-panneau.add(conposant5);
+panneau.add(composant5);
 						</code></pre>
 					</section>
 					
@@ -180,7 +180,7 @@ panneau.add(conposant5);
 						<pre><code class="hljs java" data-trim contenteditable>
 JPanel panneau = new JPanel();
 panneau.setLayout(new BoxLayout(panneau, BoxLayout.PAGE_AXIS));
-panneau.add(conposant1);
+panneau.add(composant1);
 
 Box boite = Box.createVerticalBox()
 boite.add(composant1)
@@ -197,10 +197,10 @@ boite.add(composant1)
 JPanel panneau = new JPanel();
 panneau.setLayout(new GridLayout(3, 2));
 
-panneau.add(conposant1);
-panneau.add(conposant2);
+panneau.add(composant1);
+panneau.add(composant2);
 ...
-panneau.add(conposant5);
+panneau.add(composant5);
 						</code></pre>
 					</section>
 					
@@ -214,9 +214,9 @@ panneau.add(conposant5);
 JPanel panneau = new JPanel();
 panneau.setLayout(new BorderLayout());
 
-panneau.add(conposantNord, BorderLayout.NORTH);
-panneau.add(conposantOuest, BorderLayout.WEST);
-panneau.add(conposantCentre, BorderLayout.CENTER);
+panneau.add(composantNord, BorderLayout.NORTH);
+panneau.add(composantOuest, BorderLayout.WEST);
+panneau.add(composantCentre, BorderLayout.CENTER);
 						</code></pre>
 					</section>
 					
@@ -446,7 +446,7 @@ public fenêtre extends JFrame{
 					</section>
 					
 					<section>
-						<h3>Conposants de type formulaire</h3>
+						<h3>composants de type formulaire</h3>
 						<ul>
 							<li>JComboBox : Liste déroulante</li>
 							<li>JCheckBox : Case à cocher</li>
